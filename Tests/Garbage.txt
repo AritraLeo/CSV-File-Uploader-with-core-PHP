@@ -1,0 +1,31 @@
+Side bar - https://github.com/codingmarket07/Side-Navigation-Bar/blob/master/index.html
+
+
+
+<input type="password" placeholder="Password" class="input" />
+                <i class="bi bi-eye-fill" style="display:inline-block;"></i>
+                <i class="bi bi-eye-slash-fill" style="display:inline-block;"></i>
+
+
+
+
+
+
+                // $show = '<i id="show-i" class="bi bi-eye-fill" style="display:inline-block;"></i>';
+            // $hide = '<i id="hide-i" class="bi bi-eye-slash-fill" style="display:inline-block;"></i>';
+
+
+            // if ($this.attr('id') == 'show') {
+            //     $this.append($hide)
+            //     $this.remove('#show-i');
+            //     $this.attr('id', 'hide')
+            // } else {
+            //     $this.append($show)
+            //     $this.remove('#hide-i');
+            //     $this.attr('id', 'show')
+            // }
+            // //     ($this.id == 'show') ? (
+            // //         $this.append($hide)
+            // //      $this.attr('id', 'hide') ) 
+            // //     :
+            // // ($this.append($show));

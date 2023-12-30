@@ -1,0 +1,109 @@
+
+// cinema_programmer
+include('../Database/db.php');
+session_start();
+$email = $_SESSION['email'];
+
+if (!empty($_FILES['prog_file']['name'])) {
+    $output = '';
+    $file = $_FILES['prog_file']['tmp_name'];
+    // $allowed_ext = array('csv');
+    // $extension = end(explode('.', $file));
+
+    // if (in_array($extension, $allowed_ext)) {
+    $file_data = fopen($file, 'r');
+    // fgetcsv($file_data);
+    while ($row = fgetcsv($file_data)) {
+        // print_r(json_encode($row));
+
+        // To find row[] length - 
+
+        // for ($i = 0; $row[$i] != NULL; $i++) {
+        //     $counter = $i;
+        // }
+        // $RowLen = $counter;
+        // echo $RowLen;
+
+        $output .= "
+        " . $row[10] . "
+        <br/>
+
+        ";
+
+        // Variables -
+        $session = $row[0];
+        // Skip zero kept to avoid confusion
+        $s = array();
+        $t = array();
+
+
+        // For Screens - 
+        for ($i = 1; $i <= 15; $i += 2) {
+            $sOfi = ceil($i / 2);
+            if (empty($row[$i])) {
+                $s[$sOfi] = ' ';
+            } else {
+                $s[$sOfi] = $row[$i];
+            }
+        }
+
+        // For Time - 
+        for ($j = 2; $j <= 14; $j += 2) {
+            $tOfj = $j / 2;
+            if (empty($row[$j])) {
+                $t[$tOfj] = ' ';
+            } else {
+                $t[$tOfj] = $row[$j];
+            }
+        }
+
+        // Start uploading from 6th one - particularly now - 
+
+        $insert = "INSERT INTO cinema_programmer (session, s1, t1, s2, t2, s3, t3, s4, t4, s5, t5, s6, t6, s7, t7) VALUES 
+            ('$session', 
+            '$s[1]', '$t[1]',
+            '$s[2]', '$t[2]',
+            '$s[3]', '$t[3]',
+            '$s[4]', '$t[4]',
+            '$s[5]', '$t[5]',
+            '$s[6]', '$t[6]',
+            '$s[7]', '$t[7]'
+            )";
+        $Inserted = mysqli_query($conn, $insert) or die(mysqli_error($conn));
+    }
+    echo $output;
+
+    fclose($file_data);
+    // } else {
+    //     echo 'E1';
+    // }
+} else {
+    echo 'E2';
+}
+
+
+
+/*
+$output .= "
+        
+        " . $row[1] . "
+        <br/>
+
+        " . $row[2] . "
+        <br/>
+
+        " . $row[3] . "
+        <br/>
+
+        " . $row[4] . "
+        <br/>
+
+        " . $row[5] . "
+        <br/>
+
+        " . $row[7] . "
+        <br/>
+
+        ";
+
+*/
